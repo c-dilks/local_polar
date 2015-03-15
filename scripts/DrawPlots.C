@@ -47,6 +47,14 @@ void DrawPlots(const char * filename="poltr.root")
     epsilon_MAX_BB = 0.04;
     pol_fac=0.3;
   }
+  else if(!strcmp(type,"T") && year==15) 
+  {
+    epsilon_MAX_YF = 0.04;
+    epsilon_MAX_YB = 0.04;
+    epsilon_MAX_BF = 0.04;
+    epsilon_MAX_BB = 0.04;
+    pol_fac=0.3;
+  }
   else if(!strcmp(type,"L"))
   {
     epsilon_MAX_YF = 0.006;

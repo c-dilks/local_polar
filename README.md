@@ -5,9 +5,14 @@ ZDC polarimetry data
   - [2011](http://online.star.bnl.gov/scaler2011/polarimetry/asym/runs.txt)
   - [2012](http://online.star.bnl.gov/scaler2012/polarimetry/asym/runs.txt)
   - [2013](http://online.star.bnl.gov/scaler2013/polarimetry/asym/runs.txt)
-  - save it to `zdc_pol_table.txt`
+  - [2015](http://online.star.bnl.gov/scaler2015/polarimetry/asym/runs.txt)
+  - save it to `zdc_pol_table.txt` (`curl [URL] > zdc_pol_table.txt`)
 
 * copy or symlink `goodruns.dat` from scalers directory
+  (in Run15, we use `culled_run_list.txt` from `scalers15t` instead of
+   `goodruns.dat`; so that you don't have to alter the scripts, run
+   `awk '{print $2}' culled_run_list.txt > goodruns.dat` since we only
+   really need a list of run numbers)
 
 * create `run_type` file with the following info:
   - `year` `sqrt(s)` `polarisation`
