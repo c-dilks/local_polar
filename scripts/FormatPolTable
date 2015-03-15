@@ -1,0 +1,21 @@
+#!/bin/bash
+# formats zdc_pol_table.txt by filtering out text columns
+
+infile="zdc_pol_table.txt"
+outfile="zdc_pol_table_formatted.txt"
+> $outfile
+
+cat goodruns.dat | awk '{print $1}' > runlist
+
+i=0
+while read line; do
+  str=$(echo $line | sed \
+  's/yellow //g;s/blue //g;s/forward //g;s/backward //g;s/asymmetry //g;s/polarization //g;s/analyzingpower //g;s/anglevertical //g')
+  grepstr=$(grep $(echo $str | awk '{print $2}') runlist)
+  if [ -n "$grepstr" ]; then
+    echo $i $str >> $outfile
+    let i++
+  fi
+done < $infile
+
+rm runlist
