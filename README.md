@@ -1,18 +1,25 @@
 ZDC polarimetry data
 --------------------
 
+* Create a directory for the dataset you want to look at
+  - then cd into it, and run `ln -s ../scripts/* ./` to symlink the scripts
+    and this readme
+
 * Obtain run-by-run ZDC polarimetry data
   - [2011](http://online.star.bnl.gov/scaler2011/polarimetry/asym/runs.txt)
   - [2012](http://online.star.bnl.gov/scaler2012/polarimetry/asym/runs.txt)
   - [2013](http://online.star.bnl.gov/scaler2013/polarimetry/asym/runs.txt)
   - [2015](http://online.star.bnl.gov/scaler2015/polarimetry/asym/runs.txt)
+  - (or from zdc polarimetry pages.. are these different files? should we just
+     use both of them?.. not sure, but there aren't many runs here which intersect
+     with the set of runs which I'm analysing)
+    - [2011](http://online.star.bnl.gov/zdc2011/asym/runs.txt)
+    - [2012](http://online.star.bnl.gov/zdc2012/asym/runs.txt)
+    - [2013](http://online.star.bnl.gov/zdc2013/asym/runs.txt)
+    - [2015](http://online.star.bnl.gov/zdc2015/asym/runs.txt)
   - save it to `zdc_pol_table.txt` (`curl [URL] > zdc_pol_table.txt`)
 
-* copy or symlink `goodruns.dat` from scalers directory
-  (in Run15, we use `culled_run_list.txt` from `scalers15t` instead of
-   `goodruns.dat`; so that you don't have to alter the scripts, run
-   `awk '{print $2}' culled_run_list.txt > goodruns.dat` since we only
-   really need a list of run numbers)
+* copy or symlink `goodruns.dat` from `trgmon` repository
 
 * create `run_type` file with the following info:
   - `year` `sqrt(s)` `polarisation`
