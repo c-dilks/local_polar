@@ -15,7 +15,7 @@ void DrawPlots(const char * filename="poltr.root")
 
 
   // open poltr.root
-  gStyle->SetOptStat(0);
+  //gStyle->SetOptStat(0);
   TFile * infile = new TFile(filename,"READ");
   TTree * tr = (TTree*) infile->Get("poltr");
 
@@ -179,4 +179,10 @@ void DrawPlots(const char * filename="poltr.root")
   cc->cd(5); AP_corr_B->Draw("colz");
   cc->cd(3); phi_corr_F->Draw("colz");
   cc->cd(6); phi_corr_B->Draw("colz");
+
+
+  TCanvas * c_eps = new TCanvas("c_eps","c_eps",800,800);
+  c_eps->SetGrid(1,1);
+  c_eps->SetLogz();
+  epsilon_corr_F->Draw("colz");
 };
