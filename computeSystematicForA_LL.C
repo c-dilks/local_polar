@@ -26,8 +26,8 @@ void computeSystematicForA_LL() {
     epsL[y][b] = new TGraphErrors();
 
     if(b==kYF || b==kYB) {
-      epsT[y][b]->SetMarkerColor(kOrange);
-      epsL[y][b]->SetMarkerColor(kOrange);
+      epsT[y][b]->SetMarkerColor(kOrange+8);
+      epsL[y][b]->SetMarkerColor(kOrange+8);
     } else {
       epsT[y][b]->SetMarkerColor(kBlue);
       epsL[y][b]->SetMarkerColor(kBlue);
@@ -77,6 +77,8 @@ void computeSystematicForA_LL() {
           epsTn[y][b]++;
         } else if(fill[y]==16650) {
           continue; // this fill had flaky ZDC
+        } else if(fill[y]<16582) {
+          continue; // before longitudinal period
         } else {
           epsL[y][b]->SetPoint( epsLn[y][b], i[y], epsilon[y][b] );
           epsL[y][b]->SetPointError( epsLn[y][b], 0, epsilon_err[y][b] );
@@ -107,6 +109,7 @@ void computeSystematicForA_LL() {
     if(y==k13) continue; // (no transverse runs in run13)
     canvT[cc] = new TCanvas();
     canvT[cc]->Divide(1,2);
+    for(int pp=1; pp<=2; pp++) canvT[cc]->GetPad(pp)->SetGrid(1,1);
     canvT[cc]->cd(1);
     if(epsTn[y][2*cc]>0) epsT[y][2*cc]->Draw("APE");
     canvT[cc]->cd(2);
@@ -117,6 +120,7 @@ void computeSystematicForA_LL() {
   for(int y=0; y<2; y++) for(int cc=0; cc<2; cc++) {
     canvL[cc] = new TCanvas();
     canvL[cc]->Divide(1,2);
+    for(int pp=1; pp<=2; pp++) canvL[cc]->GetPad(pp)->SetGrid(1,1);
     canvL[cc]->cd(1);
     if(epsLn[y][2*cc]>0) epsL[y][2*cc]->Draw("AP");
     canvL[cc]->cd(2);

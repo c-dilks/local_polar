@@ -12,6 +12,11 @@ while read line; do
   str=$(echo $line | sed \
   's/yellow //g;s/blue //g;s/forward //g;s/backward //g;s/asymmetry //g;s/polarization //g;s/analyzingpower //g;s/anglevertical //g')
   grepstr=$(grep $(echo $str | awk '{print $2}') runlist)
+  fill=$(echo $str | awk '{print $1}')
+  if [ $fill -eq 16570 -o $fill -eq 16578 ]; then
+    grepstr="t" # force run 12 transverse runs into tree
+  fi
+  #grepstr="a" # OVERRIDE ALL
   if [ -n "$grepstr" ]; then
     echo $i $str >> $outfile
     let i++
