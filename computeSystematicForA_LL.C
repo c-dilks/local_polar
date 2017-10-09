@@ -34,8 +34,8 @@ void computeSystematicForA_LL() {
     };
     epsT[y][b]->SetMarkerStyle(kFullCircle);
     epsL[y][b]->SetMarkerStyle(kFullCircle);
-    epsT[y][b]->SetLineWidth(3);
-    epsL[y][b]->SetLineWidth(3);
+    epsT[y][b]->SetLineWidth(2);
+    epsL[y][b]->SetLineWidth(2);
 
     title = Form("Run %d #varepsilon_{T}^{%s} vs. internal run index",year[y],beam[b].Data());
     epsT[y][b]->SetTitle(title.Data());
@@ -139,16 +139,16 @@ void computeSystematicForA_LL() {
     val_epsLY[y] = epsL[y][kYF]->GetFunction("pol0")->GetParameter(0);
   };
 
-  Float_t aSigma[2] = {0.001,0.001}; // redetermine?
+  Float_t aSigma[2] = {0.008,0.008}; // redetermined 10.08.17
 
   for(int y=0; y<2; y++) {
-    printf("Run %d\n",year[y]);
-    printf("  epsilon_L^B = %f\n",val_epsLB[y]);
-    printf("  epsilon_L^Y = %f\n",val_epsLY[y]);
-    printf("  epsilon_T^B = %f\n",val_epsTB);
-    printf("  epsilon_T^Y = %f\n",val_epsTY);
-    printf("  A_Sigma = %f\n",aSigma[y]);
-    printf("  SYSTEMATIC = %.10f\n",
+    printf("\n  Run %d\n",year[y]);
+    printf("    epsilon_L^B = %f\n",val_epsLB[y]);
+    printf("    epsilon_L^Y = %f\n",val_epsLY[y]);
+    printf("    epsilon_T^B = %f\n",val_epsTB);
+    printf("    epsilon_T^Y = %f\n",val_epsTY);
+    printf("    A_Sigma = %f\n",aSigma[y]);
+    printf("    SYSTEMATIC on A_{LL} = %.10f\n\n",
       (val_epsLB[y] / val_epsTB) * (val_epsLY[y] / val_epsTY) * aSigma[y]);
   };
 };

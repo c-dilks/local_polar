@@ -14,7 +14,7 @@ while read line; do
   grepstr=$(grep $(echo $str | awk '{print $2}') runlist)
   fill=$(echo $str | awk '{print $1}')
   if [ $fill -eq 16570 -o $fill -eq 16578 ]; then
-    grepstr="t" # force run 12 transverse runs into tree
+    grepstr="t" # force all run 12 transverse runs into tree
   fi
   #grepstr="a" # OVERRIDE ALL
   if [ -n "$grepstr" ]; then
