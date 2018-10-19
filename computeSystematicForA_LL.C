@@ -15,7 +15,7 @@ void computeSystematicForA_LL() {
   TString beam[4] = {"B","Y","B[backward]","Y[backward]"}; // Blue/Yellow Forward/Backward
   TGraphErrors * epsT[2][4]; // [year] [beam]
   TGraphErrors * epsL[2][4]; // [year] [beam]
-  TString title;
+  TString title,xaxis,yaxis;
   Int_t epsTn[2][4];
   Int_t epsLn[2][4];
   for(int y=0; y<2; y++) for(int b=0; b<4; b++) {
@@ -102,7 +102,8 @@ void computeSystematicForA_LL() {
     }
   };
 
-  gStyle->SetOptFit(1);
+  gStyle->SetOptFit(11);
+  gStyle->SetFitFormat(".3g");
 
   TCanvas * canvT[2];
   for(int y=0; y<2; y++) for(int cc=0; cc<2; cc++) {
@@ -127,6 +128,15 @@ void computeSystematicForA_LL() {
     if(epsLn[y][2*cc+1]>0) epsL[y][2*cc+1]->Draw("AP");
   };
 
+  for(int y=0; y<2; y++) for(int b=0; b<4; b++) {
+    xaxis = "internal run index";
+    yaxis = Form("#varepsilon_{T}^{%s}",beam[b].Data());
+    epsT[y][b]->GetXaxis()->SetTitle(xaxis.Data());
+    epsT[y][b]->GetYaxis()->SetTitle(yaxis.Data());
+    yaxis = Form("#varepsilon_{L}^{%s}",beam[b].Data());
+    epsL[y][b]->GetXaxis()->SetTitle(xaxis.Data());
+    epsL[y][b]->GetYaxis()->SetTitle(yaxis.Data());
+  };
 
   // compute systematic
   Float_t val_epsTB = epsT[k12][kBF]->GetFunction("pol0")->GetParameter(0);
